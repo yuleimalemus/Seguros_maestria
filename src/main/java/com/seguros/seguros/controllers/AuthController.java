@@ -47,5 +47,15 @@ public class AuthController {
         httpSession.setAttribute("currentUser", userCorredor.get());
         return "redirect:/clientes";
     }
+
+    @GetMapping(value = "/salir")
+    public String salir(@Valid Corredor corredor, BindingResult result, Model model,
+                                RedirectAttributes flash, SessionStatus sessionStatus, HttpSession httpSession) {
+        httpSession.removeAttribute("currentUser");
+        return "redirect:/login";
+
+    }
+
+
 }
 

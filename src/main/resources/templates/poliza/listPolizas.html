@@ -25,7 +25,7 @@
                 <tbody>
                 <tr th:each="poliza: ${polizas}">
                     <td th:text="${poliza.numeroPoliza}"></td>
-                    <td th:text="${poliza.tipo == 1 ? 'SOAT' : 'Todo Riesgo'}"></td>
+                    <td th:text="${poliza.tipo.equals('1') ? 'SOAT' : 'Todo Riesgo'}"></td>
                     <td th:text="${poliza.ccCliente}"></td>
                     <td th:text="${poliza.codigoCorredor}"></td>
                     <td th:text="${poliza.placa}"></td>
