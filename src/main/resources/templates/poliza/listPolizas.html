@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head"></head>
+<body>
+    <header th:replace="layouts/layout :: header"></header>
+
+    <div th:replace="layouts/layout :: title"></div>
+
+    <div class="container card main py-4 my-3">
+        <div class="card-header bg-white">
+            <a th:href="@{/polizas/form}" class="btn btn-primary">Nuevo Poliza</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Numero Poliza</th>
+                    <th>Tipo Poliza</th>
+                    <th>Cliente (cc)</th>
+                    <th>Corredor (codigo)</th>
+                    <th>Placa</th>
+                    <th>Valor pagar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="poliza: ${polizas}">
+                    <td th:text="${poliza.numeroPoliza}"></td>
+                    <td th:text="${poliza.tipo == 1 ? 'SOAT' : 'Todo Riesgo'}"></td>
+                    <td th:text="${poliza.ccCliente}"></td>
+                    <td th:text="${poliza.codigoCorredor}"></td>
+                    <td th:text="${poliza.placa}"></td>
+                    <td th:text="${poliza.valor_pagar}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer th:replace="layouts/layout :: footer"></footer>
+</body>
+</html>

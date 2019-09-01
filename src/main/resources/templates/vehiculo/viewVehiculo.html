@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head"></head>
+<body>
+<header th:replace="layouts/layout :: header"></header>
+
+<div th:replace="layouts/layout :: title"></div>
+
+<div class="container main py-4">
+    <div class="card">
+        <div class="card-header bg-white d-flex">
+            <a th:href="@{/client/list}" class="btn btn-primary text-white m-2" th:text="'Back'"></a>
+            <a th:href="@{/bill/form/{id}(id=${client.id})}" class="btn btn-success m-2 mr-auto" th:text="'Create New Bill'"></a>
+            <button th:type="button" class="btn btn-info m-2" data-toggle="modal" data-target="#inviteModal" th:text="'Invite'"></button>
+        </div>
+        <div class="card-body row">
+            <div class="col-3" th:if="${client.photo != null}">
+                <img class="client-img rounded rounded-circle shadow" th:width="120" th:height="120" th:src="@{/uploads/{img-path}(img-path=${client.photo})}" alt="client-img">
+            </div>
+            <div class="col-9" th:class="${client.photo != null} ? 'col-9' : 'col-12'">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 col-form-label">Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" th:value="${client.name}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 col-form-label">Lastname:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="lastname"  th:value="${client.lastname}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email"  th:value="${client.email}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-info" th:if="${#lists.isEmpty(client.bills)}" th:text="'Not exist bills for the client ' + ${client.name} + ' ' + ${client.lastname}"></div>
+            <table class="table table-striped" th:if="${not #lists.isEmpty(client.bills)}">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Id</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="bill: ${client.bills}">
+                        <td th:text="${bill.id}"></td>
+                        <td th:text="${bill.description}"></td>
+                        <td th:text="${bill.createdAt}"></td>
+                        <td th:text="'$' + ${bill.calculateTotal()}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="inviteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" th:action="@{/client/invite}" th:object="${invite}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inviteModalLabel">Send Invitation by Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="message" class="col-sm-2 col-form-label">Message:</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="message" th:field="*{message}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layouts/layout :: footer"></footer>
+</body>
+</html>

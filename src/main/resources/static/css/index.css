@@ -1,0 +1,19 @@
+nav.navbar.bg-success {
+    background-color: #6DB33F !important;
+}
+h1.main-title {
+    color: #6DB33F !important;
+}
+.main {
+    min-height: 350px;
+}
+.footer {
+    min-height: 200px;
+}
+.panel-home {
+    background-color: rgba(36, 208, 100, 0.88) !important;
+}
+.img-wrapper-circle {
+    height: 160px;
+    width: 160px;
+}

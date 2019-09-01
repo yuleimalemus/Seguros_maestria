@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head"></head>
+<body>
+<header th:replace="layouts/layout :: header"></header>
+
+<div th:replace="layouts/layout :: title"></div>
+
+<div class="container main py-4">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" th:action="@{/polizas/create}" th:object="${poliza}">
+                <div class="form-group row">
+                    <label for="nro_poliza" class="col-sm-2 col-form-label">Numero Poliza:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nro_poliza" th:field="*{numeroPoliza}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="poliza_tipo_select" class="col-sm-2 col-form-label">Tipo poliza (cc):</label>
+                    <div class="col-sm-10">
+                        <select id="poliza_tipo_select" class="form-control" th:field="*{tipo}">
+                            <option th:each="tipo: ${tipos_poliza}" th:value="${tipo.codTipo}" th:text="${tipo.descripcion_tipo}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fecha_inicio" class="col-sm-2 col-form-label">Fecha inicio:</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="fecha_inicio" th:field="*{fecha_inicio}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fecha_fin" class="col-sm-2 col-form-label">Fecha final:</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="fecha_fin"  th:field="*{fecha_fin}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="cc_cliente" class="col-sm-2 col-form-label">Cliente (cc):</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="cc_cliente" th:field="*{ccCliente}">
+                            <option th:each="cliente: ${clientes}" th:value="${cliente.cc}" th:text="${cliente.nombre}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="codigo_corredor" class="col-sm-2 col-form-label">Corredor (codigo):</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="codigo_corredor" readonly th:field="*{codigoCorredor}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="select_placa_poliza" class="col-sm-2 col-form-label">Placa:</label>
+                    <div class="col-sm-10">
+                        <select id="select_placa_poliza" class="form-control" th:field="*{placa}">
+
+                        </select>
+                    </div>
+                </div>
+
+                <table id="partes_table" class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Parte</th>
+                        <th>Valor</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr th:each="parte,status : ${poliza.partes}">
+                            <td th:text="${parte.descripcion}"></td>
+                            <td>
+                                <input type="number" th:field="*{partes[__${status.index}__].valor}">
+                            </td>
+                        </tr>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <div class="card-footer bg-white">
+                    <button type="submit" class="btn btn-success mb-2">Guardar Poliza</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layouts/layout :: footer"></footer>
+</body>
+</html>

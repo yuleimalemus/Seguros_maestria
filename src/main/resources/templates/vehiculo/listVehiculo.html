@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head"></head>
+<body>
+    <header th:replace="layouts/layout :: header"></header>
+
+    <div th:replace="layouts/layout :: title"></div>
+
+    <div class="container card main py-4 my-3">
+        <div class="card-header bg-white">
+            <a th:href="@{/vehiculos/form}" class="btn btn-primary">Nuevo Vehiculo</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Año</th>
+                    <th>Serie Carroceria</th>
+                    <th>Valor</th>
+                    <th>Cliente (cc)</th>
+                    <!--<th th:if="vehiculoCliente != null">SOAT</th>
+                    <th th:if="vehiculoCliente != null">Todo Riesgo</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="vehiculo: ${vehiculos}">
+                    <td th:text="${vehiculo.placa}"></td>
+                    <td th:text="${vehiculo.modelo}"></td>
+                    <td th:text="${vehiculo.marca}"></td>
+                    <td th:text="${vehiculo.anno}"></td>
+                    <td th:text="${vehiculo.serie_carroceria}"></td>
+                    <td th:text="${vehiculo.vr_comercial}"></td>
+                    <td th:text="${vehiculo.clienteCC}"></td>
+
+                    <!--<td th:if="vehiculoCliente != null" th:text="${vehiculo.soat}"></td>
+                    <td th:if="vehiculoCliente != null" th:text="${vehiculo.todoRiesgo}"></td>-->
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer th:replace="layouts/layout :: footer"></footer>
+</body>
+</html>

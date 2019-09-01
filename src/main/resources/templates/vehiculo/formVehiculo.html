@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head"></head>
+<body>
+<header th:replace="layouts/layout :: header"></header>
+
+<div th:replace="layouts/layout :: title"></div>
+
+<div class="container main py-4">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" th:action="@{/vehiculos/create}" th:object="${vehiculo}">
+                <div class="form-group row">
+                    <label for="placa" class="col-sm-2 col-form-label">Placa:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="placa"  th:field="*{placa}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="modelo" class="col-sm-2 col-form-label">Modelo:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="modelo" th:field="*{modelo}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger" ></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="marca" class="col-sm-2 col-form-label">Marca:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="marca" th:field="*{marca}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="anno" class="col-sm-2 col-form-label">Año:</label>
+                     <div class="col-sm-10">
+                        <input type="number" class="form-control" id="anno" value="2019" min="1950" max="2050" th:field="*{anno}" th:errorClass="'form-control alert-danger'">
+                     </div>
+                </div>
+                <div class="form-group row">
+                    <label for="serie_carroceria" class="col-sm-2 col-form-label">Serie Carroceria:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="serie_carroceria" th:field="*{serie_carroceria}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger" ></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="valor_comercial" class="col-sm-2 col-form-label">Valor Comercial:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="valor_comercial" th:field="*{vr_comercial}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger" ></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="cc_cliente" class="col-sm-2 col-form-label">Cliente (cc):</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="cc_cliente" th:field="*{clienteCC}">
+                            <option th:each="cliente: ${clientes}" th:value="${cliente.cc}" th:text="${cliente.cc + ' - ' + cliente.nombre}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <button type="submit" class="btn btn-success mb-2">Guardar Vehiculo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layouts/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head"></head>
+<body>
+    <header th:replace="layouts/layout :: header"></header>
+
+    <div th:replace="layouts/layout :: title"></div>
+
+    <div class="container main py-4">
+        <small>El monto total es la suma del valor de la poliza SOAT y Todo Riesgo para el vehiculo, si solo existe un tipo de poliza se usara este valor</small>
+        <div class="card">
+            <div class="card-body">
+
+                <table id="vehiculos_cliente_table" class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Placa</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Año</th>
+                        <th>Serie Carroceria</th>
+                        <th>Valor</th>
+                        <th>Cliente (cc)</th>
+                        <th>Monto Total</th>
+                        <th>Comision</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vehiculo: ${vehiculos}">
+                        <td th:text="${vehiculo.vehiculo.placa}"></td>
+                        <td th:text="${vehiculo.vehiculo.modelo}"></td>
+                        <td th:text="${vehiculo.vehiculo.marca}"></td>
+                        <td th:text="${vehiculo.vehiculo.anno}"></td>
+                        <td th:text="${vehiculo.vehiculo.serie_carroceria}"></td>
+                        <td th:text="${vehiculo.vehiculo.vr_comercial}"></td>
+                        <td th:text="${vehiculo.vehiculo.clienteCC}"></td>
+                        <td th:text="${vehiculo.total}"></td>
+                        <td th:text="${vehiculo.total * 0.15}"></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                Comision Total: <span class="badge badge-success" th:text="${comisionTotal}"></span>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="layouts/layout :: footer"></footer>
+</body>
+</html>

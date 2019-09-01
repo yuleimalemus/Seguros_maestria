@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head"></head>
+<body>
+<header th:replace="layouts/layout :: header"></header>
+
+<div th:replace="layouts/layout :: title"></div>
+
+<div class="container main py-4">
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post" th:action="@{/clientes/create}" th:object="${client}">
+                <div class="form-group row">
+                    <label for="cc" class="col-sm-2 col-form-label">CC:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="cc" th:field="*{cc}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">Nombre:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" th:field="*{nombre}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="direccion" class="col-sm-2 col-form-label">Direccion:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="direccion" th:field="*{direccion}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="telefono" class="col-sm-2 col-form-label">Telefono:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="telefono" th:field="*{telefono}" th:errorClass="'form-control alert-danger'">
+                        <small class="form-text text-danger"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="estado_civil" class="col-sm-2 col-form-label">Estado Civil:</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="estado_civil" th:field="*{estadoCivil}">
+                            <option th:value=1>Soltero</option>
+                            <option th:value=2>Casado</option>
+                            <option th:value=3>Union Libre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="edad" class="col-sm-2 col-form-label">Edad:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="edad" value="18" min="18" max="110" th:field="*{edad}" th:errorClass="'form-control alert-danger'">
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <button type="submit" class="btn btn-success mb-2">Guardar Cliente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layouts/layout :: footer"></footer>
+</body>
+</html>

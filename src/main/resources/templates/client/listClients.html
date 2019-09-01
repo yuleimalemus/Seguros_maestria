@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head"></head>
+<body>
+    <header th:replace="layouts/layout :: header"></header>
+
+    <div th:replace="layouts/layout :: title"></div>
+
+    <div class="container card main py-4 my-3">
+        <div class="card-header bg-white">
+            <a th:href="@{/clientes/form}" class="btn btn-primary">Nuevo Cliente</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>CC</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Estado Civil</th>
+                    <th>Edad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="client: ${clientes}">
+                    <td th:text="${client.cc}"></td>
+                    <td th:text="${client.nombre}"></td>
+                    <td th:text="${client.direccion}"></td>
+                    <td th:text="${client.telefono}"></td>
+                    <td th:text="${client.estadoCivil == 1 ? 'Soltero' : (client.estadoCivil == 2 ? 'Casado' : 'Union Libre')}"></td>
+                    <td th:text="${client.edad}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer th:replace="layouts/layout :: footer"></footer>
+</body>
+</html>
