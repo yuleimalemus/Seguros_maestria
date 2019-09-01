@@ -15,7 +15,7 @@ $(document).ready(function(){
         $.ajax({
             type : "GET",
             contentType : "application/json",
-            url : "http://" + $(location).attr('host') + "/reportes/vehiculos_cliente/" + clienteCC,
+            url : "https://" + $(location).attr('host') + "/reportes/vehiculos_cliente/" + clienteCC,
             dataType : 'json',
             success : function(result) {
                 var resulthtml = '';
